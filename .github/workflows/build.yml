@@ -9,9 +9,25 @@ jobs:
   docker:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      packages: write
+
     steps:
-      - name: Descargar repositorio
+      - name: Descargar código
         uses: actions/checkout@v4
 
-      - name: Construir imagen Docker
-        run: docker build -t demo:latest .
+      - name: Login GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build Docker Image
+        run: |
+          docker build -t ghcr.io/${{ github.repository_owner }}/k8s-demo-v2-160826:latest .
+
+      - name: Push Docker Image
+        run: |
+          docker push ghcr.io/${{ github.repository_owner }}/k8s-demo-v2-160826:latest
