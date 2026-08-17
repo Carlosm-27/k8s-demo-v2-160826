@@ -27,10 +27,11 @@ jobs:
       - name: Set lowercase owner
         run: echo "OWNER=${GITHUB_REPOSITORY_OWNER,,}" >> $GITHUB_ENV
 
-      - name: Build Docker Image
+      - name: Build
         run: |
-          docker build -t ghcr.io/${{ env.OWNER }}/k8s-demo-v2-160826:${{ github.sha }} .
+          docker build -t ghcr.io/carlosm-27/k8s-demo-v2-160826:${{ github.sha }} .
+          docker push ghcr.io/carlosm-27/k8s-demo-v2-160826:${{ github.sha }}
 
-      - name: Push Docker Image
+      - name: Actualizar deployment
         run: |
-          docker push ghcr.io/${{ env.OWNER }}/k8s-demo-v2-160826:${{ github.sha }}
+          sed -i "s|IMAGE_TAG|${GITHUB_SHA}|g" deployment.yaml
