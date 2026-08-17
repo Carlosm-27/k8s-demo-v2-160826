@@ -29,7 +29,7 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t ghcr.io/${{ env.OWNER }}/k8s-demo-v2-160826:{{ github.sha }}.
+          docker build -t ghcr.io/${{ env.OWNER }}/k8s-demo-v2-160826:{{ github.sha }} .
 
       - name: Push Docker Image
         run: |
