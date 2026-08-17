@@ -29,8 +29,8 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t ghcr.io/${{ env.OWNER }}/k8s-demo-v2-160826:v3 .
+          docker build -t ghcr.io/${{ env.OWNER }}/k8s-demo-v2-160826:v10 .
 
       - name: Push Docker Image
         run: |
-          docker push ghcr.io/${{ env.OWNER }}/k8s-demo-v2-160826:v3
+          docker push ghcr.io/${{ env.OWNER }}/k8s-demo-v2-160826:v10
